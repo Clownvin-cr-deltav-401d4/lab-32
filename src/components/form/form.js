@@ -5,6 +5,7 @@ import useForm from '../../hooks/useForm';
 import './form.scss';
 
 const Form = props => {
+  // eslint-disable-next-line
   const [values, onChange, onSubmit] = useForm(props.addItem);
 
   return (

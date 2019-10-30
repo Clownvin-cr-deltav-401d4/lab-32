@@ -36,9 +36,11 @@ function ToDo(props) {
 
   };
 
+  const {getTodoList} = props;
+
   useEffect(() => {
-    if (props.getTodoList) {
-      props.getTodoList(dispatch);
+    if (getTodoList) {
+      getTodoList(dispatch);
     }
   }, []);
 

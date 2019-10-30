@@ -37,6 +37,7 @@ function reducerFollowUp(state, action) {
       );
       break;
     case 'toggleComplete': //, id });
+    console.log('Follow up');
       state.todoList = state.todoList.map(item =>
         item._id === action.id ? {
           ...item,
@@ -73,7 +74,7 @@ function reducer(state, action) {
       if (!item) {
         break;
       }
-      callAPI( `${todoAPI}/${action.id}`, 'PUT', {...item, completed: !item.completed}, action.dispatch({...action, followUp: true}) );
+      callAPI( `${todoAPI}/${action.id}`, 'PUT', {...item, complete: !item.complete}, action.dispatch({...action, followUp: true}) );
       break;
     case 'toggleDetails': //, id });
       item = state.todoList.find(item => item._id === action.id);
