@@ -1,0 +1,11 @@
+{
+  "name": "display-completed-provider",
+  "version": "1.0.0",
+  "description": "<DisplayCompletedProvider> Component",
+  "main": "display-completed-provider.js",
+  "scripts": {
+    "test": "jest -i --verbose --coverage"
+  },
+  "author": "Clownvin",
+  "license": "ISC"
+}

@@ -16,7 +16,7 @@ const TodoList = props => {
     const count = Math.ceil(props.todoList.length / itemCount.count);
     for (let i = 0; i < count; i++) {
       buttons.push((
-        <button onClick={() => setPage(i)} disabled={page === i}>{ i + 1 }</button>
+        <button key={i} onClick={() => setPage(i)} disabled={page === i}>{ i + 1 }</button>
       ));
     }
     return buttons;
