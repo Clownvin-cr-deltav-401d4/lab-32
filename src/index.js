@@ -2,10 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app.js';
 
+import ItemCountProvider from './context/item-count';
+
 class Main extends React.Component {
   render() {
     return (
-      <App />
+      <ItemCountProvider>
+        <App />
+      </ItemCountProvider>
     );
   }
 }
