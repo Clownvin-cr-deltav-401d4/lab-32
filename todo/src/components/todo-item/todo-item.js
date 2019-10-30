@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './todo-item.module.scss';
+import './todo-item.scss';
 
 function TodoItem(props) {
   return (

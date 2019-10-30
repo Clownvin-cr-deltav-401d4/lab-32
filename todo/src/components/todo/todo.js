@@ -1,110 +1,115 @@
-import React from 'react';
+import React, {useReducer} from 'react';
 import uuid from 'uuid/v4';
 import { When } from '../if';
 import Modal from '../modal';
 
-import Header from '../header';
-import Form from '../form';
-import TodoList from '../todo-list';
+import Header from '../header/header';
+import Form from '../form/form';
+import TodoList from '../todo-list/todo-list';
 import TodoDetails from '../todo-details/todo-details';
 
 import './todo.scss';
 
-class ToDo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todoList: [],
-      item: {},
-      showDetails: false,
-      details: {},
-    };
+function reducer(state, action) {
+  let item;
+  switch (action.type) {
+    case 'input': //change: {[name]: value}});
+      state.item = {...state.item, ...action.change};
+      break;
+    case 'add': //, item });
+      const defaults = { _id: uuid(), complete:false };
+      item = Object.assign({}, state.item, defaults);
+      state.todoList.push(item);
+      break;
+    case 'delete': //, id });
+      state.todoList = state.todoList.filter(item => item._id !== action.id);
+      break;
+    case 'save': //, item });
+      state.todoList = state.todoList.map(item =>
+        item._id === action.item._id ? action.item : item
+      );
+      break;
+    case 'toggleComplete': //, id });
+      state.todoList = state.todoList.map(item =>
+        item._id === action.id ? {
+          ...item,
+          complete: !item.complete,
+        } : item
+      );
+      break;
+    case 'toggleDetails': //, id });
+        item = state.todoList.find(item => item._id === action.id);
+        state.details = item || {};
+        state.showDetails = !!item;
+      break;
+    default:
+      console.error('Uncaught action.type:', action.type);
+  }
+  return {...state};
+}
+
+function ToDo(props) {
+  const [state, dispatchFunc] = useReducer(props.reducer, {
+    todoList: [],
+    item: {},
+    showDetails: false,
+    details: {},
+  });
+
+  const dispatch = (action) => {
+    dispatchFunc({...action, dispatch});
   }
 
-  handleInputChange = e => {
+  const handleInputChange = e => {
     let { name, value } = e.target;
-    this.setState(state => ({
-      item: {...state.item, [name]: value},
-    }));
-    console.log(this.state);
+    dispatch({ type: 'input', change: {[name]: value}});
   };
 
-  handleSubmit = (e) => {
-    this.props.handleSubmit(this.state.item);
-  };
-
-  addItem = (e) => {
+  const addItem = (e) => {
 
     e.preventDefault();
     e.target.reset();
 
-    const defaults = { _id: uuid(), complete:false };
-    const item = Object.assign({}, this.state.item, defaults);
-
-    this.setState(state => ({
-      todoList: [...state.todoList, item],
-      item: {},
-    }));
+    dispatch({ type: 'add'});
 
   };
 
-  deleteItem = id => {
+  const deleteItem = id => {
 
-    this.setState(state => ({
-      todoList: state.todoList.filter(item => item._id !== id),
-    }));
+    dispatch({ type: 'delete', id });
 
   };
 
-  saveItem = updatedItem => {
+  const saveItem = item => {
 
-    this.setState(state => ({
-      todoList: state.todoList.map(item =>
-        item._id === updatedItem._id ? updatedItem : item
-      ),
-    }));
+    dispatch({ type: 'save', item });
 
   };
 
-  toggleComplete = id => {
-    this.setState(state => ({
-      todoList: state.todoList.map(item =>
-        item._id === id ? {
-          ...item,
-          complete: !item.complete,
-        } : item
-      ),
-    }));
+  const toggleComplete = id => {
+
+    dispatch({ type: 'toggleComplete', id });
   };
 
-  toggleDetails = id => {
-    this.setState(state => {
-      let item = state.todoList.find(item => item._id === id);
-      return {
-        details: item || {},
-        showDetails: !!item,
-      };
-    });
+  const toggleDetails = id => {
+    dispatch({ type: 'toggleDetails', id });
   }
 
-  render() {
+  return (
+    <>
+      <Header count={state.todoList.filter( item => !item.complete ).length} />
+      <section className="todo">
+        <Form addItem={addItem} handleInputChange={handleInputChange} />
+        <TodoList todoList={state.todoList} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
+      </section>
 
-    return (
-      <>
-        <Header count={this.state.todoList.filter( item => !item.complete ).length} />
-        <section className="todo">
-          <Form addItem={this.addItem} handleInputChange={this.handleInputChange} />
-          <TodoList todoList={this.state.todoList} toggleComplete={this.toggleComplete} toggleDetails={this.toggleDetails} deleteItem={this.deleteItem} />
-        </section>
-
-        <When condition={this.state.showDetails}> 
-          <Modal title="To Do Item" close={this.toggleDetails}>
-            <TodoDetails item={this.state.details} />
-          </Modal>
-        </When>
-      </>
-    );
-  }
+      <When condition={state.showDetails}> 
+        <Modal title="To Do Item" close={toggleDetails}>
+          <TodoDetails item={state.details} />
+        </Modal>
+      </When>
+    </>
+  );
 }
 
 export default ToDo;

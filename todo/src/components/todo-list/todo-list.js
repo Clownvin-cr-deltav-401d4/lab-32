@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './todo-list.module.scss';
+import './todo-list.scss';
 
 import TodoItem from '../todo-item';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 
 // State Only
-import ToDo from './components/todo/todo.js';
+import ToDo from './components/todo/todo-local.js';
 
 // API Connected (Live Data)
 import ToDoConnected from './components/todo/todo-connected.js';

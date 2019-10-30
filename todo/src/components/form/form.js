@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './form.module.scss';
+import './form.scss';
 
 const Form = props => {
   return (
