@@ -1,0 +1,11 @@
+{
+  "name": "form",
+  "version": "1.0.0",
+  "description": "<Form> Component",
+  "main": "form.js",
+  "scripts": {
+    "test": "jest -i --verbose --coverage"
+  },
+  "author": "Clownvin",
+  "license": "ISC"
+}

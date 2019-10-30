@@ -1,0 +1,11 @@
+{
+  "name": "header",
+  "version": "1.0.0",
+  "description": "<Header> Component",
+  "main": "header.js",
+  "scripts": {
+    "test": "jest -i --verbose --coverage"
+  },
+  "author": "Clownvin",
+  "license": "ISC"
+}
