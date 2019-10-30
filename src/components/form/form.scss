@@ -1,0 +1,12 @@
+form {
+
+  display:flex;
+  flex-direction:column;
+  margin-right: 2em;
+
+  label {
+      display: flex;
+      flex-direction:column;
+      margin-bottom: 1em;
+  }
+}

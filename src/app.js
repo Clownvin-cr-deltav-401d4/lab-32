@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 
 // State Only
-import ToDo from './components/todo/todo.js';
+import ToDo from './components/todo/todo-local.js';
 
 // API Connected (Live Data)
 import ToDoConnected from './components/todo/todo-connected.js';
@@ -10,7 +10,7 @@ import ToDoConnected from './components/todo/todo-connected.js';
 export default class App extends React.Component {
   render() {
     return (
-      <>
+      <BrowserRouter>
         <nav>
           <ul>
             <li><Link to="/">Local ToDo</Link></li>
@@ -21,7 +21,7 @@ export default class App extends React.Component {
           <Route path="/connected" component={ToDoConnected} />
           <Route component={ToDo} />
         </Switch>
-      </>
+      </BrowserRouter>
     );
   }
 }

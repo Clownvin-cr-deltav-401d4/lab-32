@@ -1,0 +1,11 @@
+{
+  "name": "todo-details",
+  "version": "1.0.0",
+  "description": "<TodoDetails> Component",
+  "main": "todo-details.js",
+  "scripts": {
+    "test": "jest -i --verbose --coverage"
+  },
+  "author": "Clownvin",
+  "license": "ISC"
+}
