@@ -23,10 +23,10 @@ const callAPI = (url, method='get', body, handler, errorHandler) => {
     .catch( (e) => typeof errorHandler === 'function' ? errorHandler(e) : console.error(e)  );
 };
 
-const getTodoItems = () => {
-  const _updateState = data => this.setState({ todoList: data.results });
-  this.callAPI( todoAPI, 'GET', undefined, _updateState );
-};
+// const getTodoItems = () => {
+//   const _updateState = data => this.setState({ todoList: data.results });
+//   this.callAPI( todoAPI, 'GET', undefined, _updateState );
+// };
 
 function reducer(state, action) {
   let item;
@@ -58,12 +58,17 @@ function reducer(state, action) {
       }
       break;
     case 'toggleComplete': //, id });
-      state.todoList = state.todoList.map(item =>
-        item._id === action.id ? {
-          ...item,
-          complete: !item.complete,
-        } : item
-      );
+      if (!action.followUp) {
+        const item = state.todoList.find(item => item.id === action.id);
+        callAPI( `${todoAPI}/${action.id}`, 'PUT', {...item, completed: !item.completed}, action.dispatch({...action, followUp: true}) );
+      } else {
+        state.todoList = state.todoList.map(item =>
+          item._id === action.id ? {
+            ...item,
+            complete: !item.complete,
+          } : item
+        );
+      }
       break;
     case 'toggleDetails': //, id });
         item = state.todoList.find(item => item._id === action.id);
