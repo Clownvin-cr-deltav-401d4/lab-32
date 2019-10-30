@@ -25,9 +25,6 @@ const callAPI = (url, method='get', body, handler, errorHandler) => {
 
 function reducerFollowUp(state, action) {
   switch (action.type) {
-    case 'initialize':
-      state.todoList = action.todoList;
-      break;
     case 'add': //, item });
       state.todoList.push(action.item);
       break;
@@ -59,9 +56,8 @@ function reducer(state, action) {
   }
   let item;
   switch (action.type) {
-    case 'initialize':
-      callAPI( todoAPI, 'GET', null, (res) => action.dispatch({...action, todoList: res.results, followUp: true}) );
-      state.todoList = [];
+    case 'setTodo':
+      state.todoList = action.todoList;
       break;
     case 'input': //change: {[name]: value}});
       state.item = {...state.item, ...action.change};
@@ -95,7 +91,9 @@ function reducer(state, action) {
 
 function ToDoConnected() {
   return (
-    <ToDo reducer={reducer} />
+    <ToDo reducer={reducer} getTodoList={(dispatch) => {
+      callAPI( todoAPI, 'GET', null, data => dispatch({type: 'setTodo', todoList: data.results}) );
+    }}/>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useEffect} from 'react';
 import { When } from '../if';
 import Modal from '../modal';
 
@@ -11,7 +11,7 @@ import './todo.scss';
 
 function ToDo(props) {
   const [state, dispatchFunc] = useReducer(props.reducer, {
-    todoList: null,
+    todoList: [],
     item: {},
     showDetails: false,
     details: {},
@@ -44,6 +44,12 @@ function ToDo(props) {
     dispatch({ type: 'delete', id });
 
   };
+
+  useEffect(() => {
+    if (props.getTodoList) {
+      props.getTodoList(dispatch);
+    }
+  }, [])
 
   // const saveItem = item => {
 
