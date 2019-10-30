@@ -7,12 +7,9 @@ import './todo.scss';
 function reducer(state, action) {
   let item;
   switch (action.type) {
-    case 'input': //change: {[name]: value}});
-      state.item = {...state.item, ...action.change};
-      break;
     case 'add': //, item });
       const defaults = { _id: uuid(), complete:false };
-      item = Object.assign({}, state.item, defaults);
+      item = Object.assign({}, action.item, defaults);
       state.todoList.push(item);
       break;
     case 'delete': //, id });

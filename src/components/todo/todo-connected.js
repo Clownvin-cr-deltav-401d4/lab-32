@@ -59,11 +59,8 @@ function reducer(state, action) {
     case 'setTodo':
       state.todoList = action.todoList;
       break;
-    case 'input': //change: {[name]: value}});
-      state.item = {...state.item, ...action.change};
-      break;
     case 'add': //, item });
-      callAPI( todoAPI, 'POST', state.item, item => action.dispatch({ ...action, item, followUp: true }) );
+      callAPI( todoAPI, 'POST', action.item, item => action.dispatch({ ...action, item, followUp: true }) );
       break;
     case 'delete': //, id });
       callAPI( `${todoAPI}/${action.id}`, 'DELETE', null, () => action.dispatch({...action, followUp: true}) );

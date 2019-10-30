@@ -25,18 +25,9 @@ function ToDo(props) {
     dispatch({type: 'initialize'});
   }
 
-  const handleInputChange = e => {
-    let { name, value } = e.target;
-    dispatch({ type: 'input', change: {[name]: value}});
-  };
-
-  const addItem = (e) => {
-
-    e.preventDefault();
-    e.target.reset();
-
-    dispatch({ type: 'add'});
-
+  const addItem = (item) => {
+    console.log(item);
+    dispatch({ type: 'add', item});
   };
 
   const deleteItem = id => {
@@ -49,7 +40,7 @@ function ToDo(props) {
     if (props.getTodoList) {
       props.getTodoList(dispatch);
     }
-  }, [])
+  }, []);
 
   // const saveItem = item => {
 
@@ -70,7 +61,7 @@ function ToDo(props) {
     <>
       <Header count={state.todoList ? state.todoList.filter( item => !item.complete ).length : 0} />
       <section className="todo">
-        <Form addItem={addItem} handleInputChange={handleInputChange} />
+        <Form addItem={addItem} />
         <TodoList todoList={state.todoList} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
       </section>
 
