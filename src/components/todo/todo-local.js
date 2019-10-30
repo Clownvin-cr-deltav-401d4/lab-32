@@ -7,6 +7,9 @@ import './todo.scss';
 function reducer(state, action) {
   let item;
   switch (action.type) {
+    case 'initialize':
+      state.todoList = [];
+      break;
     case 'input': //change: {[name]: value}});
       state.item = {...state.item, ...action.change};
       break;

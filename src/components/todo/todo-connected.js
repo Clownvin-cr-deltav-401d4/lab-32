@@ -23,13 +23,11 @@ const callAPI = (url, method='get', body, handler, errorHandler) => {
     .catch( (e) => typeof errorHandler === 'function' ? errorHandler(e) : console.error(e)  );
 };
 
-// const getTodoItems = () => {
-//   const _updateState = data => this.setState({ todoList: data.results });
-//   this.callAPI( todoAPI, 'GET', undefined, _updateState );
-// };
-
 function reducerFollowUp(state, action) {
   switch (action.type) {
+    case 'initialize':
+      state.todoList = action.todoList;
+      break;
     case 'add': //, item });
       state.todoList.push(action.item);
       break;
@@ -61,6 +59,10 @@ function reducer(state, action) {
   }
   let item;
   switch (action.type) {
+    case 'initialize':
+      callAPI( todoAPI, 'GET', null, (res) => action.dispatch({...action, todoList: res.results, followUp: true}) );
+      state.todoList = [];
+      break;
     case 'input': //change: {[name]: value}});
       state.item = {...state.item, ...action.change};
       break;

@@ -11,7 +11,7 @@ import './todo.scss';
 
 function ToDo(props) {
   const [state, dispatchFunc] = useReducer(props.reducer, {
-    todoList: [],
+    todoList: null,
     item: {},
     showDetails: false,
     details: {},
@@ -19,6 +19,10 @@ function ToDo(props) {
 
   const dispatch = (action) => {
     dispatchFunc({...action, dispatch});
+  }
+
+  if(!state.todoList) {
+    dispatch({type: 'initialize'});
   }
 
   const handleInputChange = e => {
@@ -58,7 +62,7 @@ function ToDo(props) {
 
   return (
     <>
-      <Header count={state.todoList.filter( item => !item.complete ).length} />
+      <Header count={state.todoList ? state.todoList.filter( item => !item.complete ).length : 0} />
       <section className="todo">
         <Form addItem={addItem} handleInputChange={handleInputChange} />
         <TodoList todoList={state.todoList} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
