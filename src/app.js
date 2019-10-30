@@ -7,21 +7,28 @@ import ToDo from './components/todo/todo-local.js';
 // API Connected (Live Data)
 import ToDoConnected from './components/todo/todo-connected.js';
 
+import ItemCountProvider from './context/item-count';
+import DisplayCompletedProvider from './context/display-completed';
+
 export default class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
-        <nav>
-          <ul>
-            <li><Link to="/">Local ToDo</Link></li>
-            <li><Link to="/connected">Connected ToDo</Link></li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route path="/connected" component={ToDoConnected} />
-          <Route component={ToDo} />
-        </Switch>
-      </BrowserRouter>
+      <ItemCountProvider>
+        <DisplayCompletedProvider>
+          <BrowserRouter>
+            <nav>
+              <ul>
+                <li><Link to="/">Local ToDo</Link></li>
+                <li><Link to="/connected">Connected ToDo</Link></li>
+              </ul>
+            </nav>
+            <Switch>
+              <Route path="/connected" component={ToDoConnected} />
+              <Route component={ToDo} />
+            </Switch>
+          </BrowserRouter>
+        </DisplayCompletedProvider>
+      </ItemCountProvider>
     );
   }
 }
