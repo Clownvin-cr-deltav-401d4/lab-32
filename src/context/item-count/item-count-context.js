@@ -8,10 +8,11 @@ class ItemCountProvider extends React.Component {
 
     this.state = {
       count: props.default || 5,
+      setCount: this.setCount,
     };
   }
 
-  setItemCount = (count) => {
+  setCount = (count) => {
     this.setState({count});
   }
 

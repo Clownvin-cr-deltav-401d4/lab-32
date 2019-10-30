@@ -13,10 +13,10 @@ const TodoList = props => {
 
   const getButtons = () => {
     let buttons = [];
-    const count = Math.ceil(props.todoList.length / itemCount.count) || 1;
+    const count = Math.ceil(props.todoList.length / itemCount.count);
     for (let i = 0; i < count; i++) {
       buttons.push((
-        <button onClick={() => setPage(i)}>{ i + 1 }</button>
+        <button onClick={() => setPage(i)} disabled={page === i}>{ i + 1 }</button>
       ));
     }
     return buttons;
@@ -24,6 +24,12 @@ const TodoList = props => {
 
   return (
     <div>
+      Results per page:
+      <button onClick={() => itemCount.setCount(5)} >5</button>
+      <button onClick={() => itemCount.setCount(10)} >10</button>
+      <button onClick={() => itemCount.setCount(15)} >15</button>
+      <button onClick={() => itemCount.setCount(20)} >20</button>
+      <br />
       <ul>
         { props.todoList.slice(start, end).map(item => (
           <TodoItem key={item._id} item={item} toggleComplete={props.toggleComplete} toggleDetails={props.toggleDetails} deleteItem={props.deleteItem} />
