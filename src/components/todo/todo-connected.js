@@ -28,52 +28,62 @@ const callAPI = (url, method='get', body, handler, errorHandler) => {
 //   this.callAPI( todoAPI, 'GET', undefined, _updateState );
 // };
 
+function reducerFollowUp(state, action) {
+  switch (action.type) {
+    case 'add': //, item });
+      state.todoList.push(action.item);
+      break;
+    case 'delete': //, id });
+      state.todoList = state.todoList.filter(item => item._id !== action.id);
+      break;
+    case 'save': //, item });
+      state.todoList = state.todoList.map(item =>
+        item._id === action.item._id ? action.item : item
+      );
+      break;
+    case 'toggleComplete': //, id });
+      state.todoList = state.todoList.map(item =>
+        item._id === action.id ? {
+          ...item,
+          complete: !item.complete,
+        } : item
+      );
+      break;
+    default:
+      console.error('Uncaught action.type:', action.type);
+  }
+  return {...state};
+}
+
 function reducer(state, action) {
+  if (action.followUp) {
+    return reducerFollowUp(state, action);
+  }
   let item;
   switch (action.type) {
     case 'input': //change: {[name]: value}});
       state.item = {...state.item, ...action.change};
       break;
     case 'add': //, item });
-      if (!action.followUp) {
-        callAPI( todoAPI, 'POST', state.item, item => action.dispatch({ ...action, item, followUp: true }) );
-      } else {
-        state.todoList.push(action.item);
-      }
+      callAPI( todoAPI, 'POST', state.item, item => action.dispatch({ ...action, item, followUp: true }) );
       break;
     case 'delete': //, id });
-      if (!action.followUp) {
-        callAPI( `${todoAPI}/${action.id}`, 'DELETE', null, () => action.dispatch({...action, followUp: true}) );
-      } else {
-        state.todoList = state.todoList.filter(item => item._id !== action.id);
-      }
+      callAPI( `${todoAPI}/${action.id}`, 'DELETE', null, () => action.dispatch({...action, followUp: true}) );
       break;
     case 'save': //, item });
-      if (!action.followUp) {
-        callAPI( `${todoAPI}/${action.item._id}`, 'PUT', action.item, action.dispatch({...action, followUp: true}) );
-      } else {
-        state.todoList = state.todoList.map(item =>
-          item._id === action.item._id ? action.item : item
-        );
-      }
+      callAPI( `${todoAPI}/${action.item._id}`, 'PUT', action.item, action.dispatch({...action, followUp: true}) );
       break;
     case 'toggleComplete': //, id });
-      if (!action.followUp) {
-        const item = state.todoList.find(item => item.id === action.id);
-        callAPI( `${todoAPI}/${action.id}`, 'PUT', {...item, completed: !item.completed}, action.dispatch({...action, followUp: true}) );
-      } else {
-        state.todoList = state.todoList.map(item =>
-          item._id === action.id ? {
-            ...item,
-            complete: !item.complete,
-          } : item
-        );
+      item = state.todoList.find(item => item._id === action.id);
+      if (!item) {
+        break;
       }
+      callAPI( `${todoAPI}/${action.id}`, 'PUT', {...item, completed: !item.completed}, action.dispatch({...action, followUp: true}) );
       break;
     case 'toggleDetails': //, id });
-        item = state.todoList.find(item => item._id === action.id);
-        state.details = item || {};
-        state.showDetails = !!item;
+      item = state.todoList.find(item => item._id === action.id);
+      state.details = item || {};
+      state.showDetails = !!item;
       break;
     default:
       console.error('Uncaught action.type:', action.type);
