@@ -1,4 +1,4 @@
-# LAB - 32
+# LAB - 32 / 33
 
 ## TODO Server (Again)
 You’ve been supplied starter code for the To Do application that can (optionally) connect to a live API server. In this assignment, you’ll need to refactor the application in a number of ways:
@@ -9,13 +9,27 @@ You’ve been supplied starter code for the To Do application that can (optional
 * Alter the application to use the connected component, as you’ll need to use your live server to save real data and fire real events.
 * Convert the form component use the form hook you created in the practice assignment
 * Implement the Q hook and subscribe to the various CRUD events that your deployed API and Q server are wired for.
-As you save/delete records, anyone using your application (e.g. having multiple tabs open) should see updates in real time.
+* As you save/delete records, anyone using your application (e.g. having multiple tabs open) should see updates in real time.
+## Changes for lab 33
+Create a context for managing application settings
+* Number of items to display per screen (number)
+* Display completed items (boolean)
+
+Implement Pagination
+
+* Only display the first n items in the list, where n is the number to display per screen in your context.
+* If you have more than n items in the list, add a button labeled Next that will replace the list with the next n items in the list.
+* If you are past the first n items (i.e. on page 2 or higher), add a button labeled Previous that will replace the list with the previous n items in the list.
+* Filter the completed items out of the list (or not) based on the appropriate setting in context.
+* Once you have the new core functionality working, make the application production ready
+
+Modularize and Refactor the app using Hooks for state management
 
 ### Author: Calvin Hall
 
 ### Links and Resources
-* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/1)
-* [![Build Status](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32.svg?branch=master)](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32)
+* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/2)
+* [![Build Status](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32.svg?branch=dev)](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32)
 
 ## Modules
 ## Modules
@@ -35,6 +49,17 @@ Clicking the details button will open a modal with the rest of the details.
 ### Details
 A details modal for todo items. Displays more information, such as the asignee, the difficulty, and the date.
 
+### ItemCountContext/Provider
+A context for item count, or how many items to display per page.
+
+### useItemCount
+A hook to enable easy access to ItemCountContext
+
+### DisplayCompletedContext/Provider
+A context for toggling the display of completed items.
+
+### useDisplayCompleted
+A hook to enable easy access to DisplayCompletedContext
 
 ## Running the app
 * `npm start`

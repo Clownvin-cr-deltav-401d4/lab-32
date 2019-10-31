@@ -14,7 +14,7 @@ function TodoItem(props) {
       <button onClick={() => props.toggleDetails(props.item._id)}>
         Details
       </button>
-      <button onClick={() => props.deleteItem(props.item._id)}>
+      <button className="delete" onClick={() => props.deleteItem(props.item._id)}>
         Delete
       </button>
     </li>

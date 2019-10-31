@@ -7,6 +7,8 @@ import Form from '../form/form';
 import TodoList from '../todo-list/todo-list';
 import TodoDetails from '../todo-details/todo-details';
 
+import useDisplayCompleted from '../../hooks/useDisplayCompleted';
+
 import './todo.scss';
 
 function ToDo(props) {
@@ -59,12 +61,15 @@ function ToDo(props) {
     dispatch({ type: 'toggleDetails', id });
   }
 
+  const displayCompleted = useDisplayCompleted();
+
   return (
     <>
       <Header count={state.todoList ? state.todoList.filter( item => !item.complete ).length : 0} />
       <section className="todo">
         <Form addItem={addItem} />
-        <TodoList todoList={state.todoList} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
+        <button onClick={displayCompleted.toggleDisplayCompleted}>{displayCompleted.displayCompleted ? 'Hide' : 'Show'} Completed</button>
+        <TodoList todoList={displayCompleted.displayCompleted ? state.todoList : state.todoList.filter(item => !item.complete)} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
       </section>
 
       <When condition={state.showDetails}> 

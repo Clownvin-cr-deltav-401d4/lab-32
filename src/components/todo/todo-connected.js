@@ -37,7 +37,6 @@ function reducerFollowUp(state, action) {
       );
       break;
     case 'toggleComplete': //, id });
-    console.log('Follow up');
       state.todoList = state.todoList.map(item =>
         item._id === action.id ? {
           ...item,

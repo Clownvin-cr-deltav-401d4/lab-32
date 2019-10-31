@@ -1,0 +1,11 @@
+{
+  "name": "item-count-provider",
+  "version": "1.0.0",
+  "description": "<ItemCountProvider> Component",
+  "main": "item-count-context.js",
+  "scripts": {
+    "test": "jest -i --verbose --coverage"
+  },
+  "author": "Clownvin",
+  "license": "ISC"
+}
