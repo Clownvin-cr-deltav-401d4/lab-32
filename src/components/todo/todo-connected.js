@@ -11,6 +11,8 @@ import useDisplayCompleted from '../../hooks/useDisplayCompleted';
 
 import './todo.scss';
 
+import { Auth } from '../../context/authorization';
+
 import useLogin from '../../hooks/useLogin';
 
 const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
@@ -147,10 +149,12 @@ function ToDoConnected(props) {
   return (
     <>
       <ConnectedHeader count={state.todoList ? state.todoList.filter( item => !item.complete ).length : 0} />
-      {loginContext.user ? (
+      <When condition={!!loginContext.user}>
         <>
           <section className="todo">
-            <Form addItem={addItem} />
+            <Auth type="create">
+              <Form addItem={addItem} />
+            </Auth>
             <button onClick={displayCompleted.toggleDisplayCompleted}>{displayCompleted.displayCompleted ? 'Hide' : 'Show'} Completed</button>
             <TodoList todoList={displayCompleted.displayCompleted ? state.todoList : state.todoList.filter(item => !item.complete)} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
           </section>
@@ -160,8 +164,8 @@ function ToDoConnected(props) {
               <TodoDetails item={state.details} />
             </Modal>
           </When> 
-        </>)
-      : null}
+        </>
+      </When>
     </>
   );
 }

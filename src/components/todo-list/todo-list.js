@@ -16,20 +16,15 @@ const TodoList = props => {
   }
   /*
   for page buttons.
-  const count = Math.ceil(props.todoList.length / itemCount.count);
+  
+  */
+  const getPageButtons = () => {
+    let buttons = [];
+    const count = Math.ceil(props.todoList.length / itemCount.count);
     for (let i = 0; i < count; i++) {
       buttons.push((
         <button key={i} onClick={() => setPage(i)} disabled={page === i}>{ i + 1 }</button>
       ));
-    }
-  */
-  const getPageButtons = () => {
-    let buttons = [];
-    if (page < pageCount - 1) {
-      buttons.push(<button onClick={() => setPage(page + 1)}>Next</button>);
-    }
-    if (page > 0) {
-      buttons.push(<button onClick={() => setPage(page - 1)}>Previous</button>);
     }
     return buttons;
   }
@@ -57,9 +52,11 @@ const TodoList = props => {
         ))}
       </ul>
       Page {page + 1} of {pageCount}
+      <button onClick={() => setPage(page + 1)} disabled={page >= pageCount - 1}>Next</button>
       {
         getPageButtons()
       }
+      <button onClick={() => setPage(page - 1)} disabled={page <= 0}>Previous</button>
     </div>
   );
 };
