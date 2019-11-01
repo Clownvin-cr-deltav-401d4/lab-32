@@ -1,0 +1,58 @@
+@import '../lib/variables';
+@import '../lib/mixins';
+
+form {
+  display: flex;
+  flex-direction: column;
+  background-color: $primary-color;
+  border-radius: 3px;
+
+  fieldset {
+    border: 1px solid $accent-color;
+    border-top: 2px solid $accent-color;
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+    flex-direction: column;
+    justify-content: baseline;
+    border-radius: 3px;
+  }
+
+  legend {
+    font-size: 125%;
+  }
+
+  label {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+
+    span {
+      text-align: right;
+      margin: auto;
+      margin-right: 5%;
+      @include userSelect(none);
+    }
+  }
+
+  input, select, textarea {
+    text-align: center;
+    border: 1px solid $primary-light !important;
+    margin: 3px;
+    background-color: $primary-dark !important;
+    color: $accent-color !important;
+    outline: none !important;
+    &::selection {
+      color: $primary-dark;
+      background-color: $accent-color;
+    }
+  }
+
+  input[type="submit"], button {
+    font-size: 150%;
+  }
+
+  option:checked {
+    color: $primary-dark !important;
+    background-color: $accent-color !important;
+  }
+}

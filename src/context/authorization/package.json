@@ -1,0 +1,11 @@
+{
+  "name": "authorization",
+  "version": "1.0.0",
+  "description": "<LoginProvider> Component",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest -i --verbose --coverage"
+  },
+  "author": "Clownvin",
+  "license": "ISC"
+}

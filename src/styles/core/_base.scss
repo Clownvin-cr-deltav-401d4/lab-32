@@ -1,0 +1,14 @@
+button {
+  font-size: 115%;
+  padding: 1%;
+  text-align: center;
+  border: 1px solid $primary-light !important;
+  margin: 3px;
+  background-color: $primary-dark !important;
+  color: $accent-color !important;
+  outline: none !important;
+  &::selection {
+    color: $primary-dark;
+    background-color: $accent-color;
+  }
+}

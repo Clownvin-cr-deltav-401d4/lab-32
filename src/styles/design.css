@@ -1,0 +1,42 @@
+body {
+  background-color: #222;
+  color: #0F5;
+}
+
+button, input[type=button], input[type=submit] {
+  border-style: solid;
+  border-radius: 15px;
+  background-color: #222;
+  color: #0F5;
+}
+
+header {
+  margin: auto;
+  color: #0F5;
+}
+
+footer {
+  margin: auto;
+  color: #0F5;
+}
+
+main {
+  margin: auto;
+  color: #0F5;
+}
+
+a {
+  color: #0F5;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #0F5;
+  text-decoration: none;
+}
+
+p {
+  color: #0F5;
+}
+
+/*# sourceMappingURL=design.css.map */

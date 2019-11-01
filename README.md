@@ -1,4 +1,4 @@
-# LAB - 32 / 33
+# LAB - 32 / 33 / 34
 
 ## TODO Server (Again)
 You’ve been supplied starter code for the To Do application that can (optionally) connect to a live API server. In this assignment, you’ll need to refactor the application in a number of ways:
@@ -25,10 +25,21 @@ Implement Pagination
 
 Modularize and Refactor the app using Hooks for state management
 
+## Changes for lab 34
+
+* Hide the entire interface until the user has logged in.
+* Provide a login and logout option in the header of the app
+Implement the following RBAC rules:
+* Logged In Users with ‘read’ permissions can see the summary/count
+* Logged In Users with ‘read’ permissions can see the list of To Do Items
+* Logged In Users with ‘delete’ permissions can click the records to mark them as complete
+* Logged In Users with ‘update’ permissions can edit existing items
+* Logged In Users with ‘create’ permissions can create new items
+
 ### Author: Calvin Hall
 
 ### Links and Resources
-* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/2)
+* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/3)
 * [![Build Status](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32.svg?branch=dev)](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32)
 
 ## Modules
@@ -60,6 +71,12 @@ A context for toggling the display of completed items.
 
 ### useDisplayCompleted
 A hook to enable easy access to DisplayCompletedContext
+
+### LoginContext/Provider
+A context provider for login information
+
+### useLogin
+A hook to enable easy access to LoginContext
 
 ## Running the app
 * `npm start`

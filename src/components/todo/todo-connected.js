@@ -1,8 +1,17 @@
-import React from 'react';
+import React, {useReducer, useEffect} from 'react';
+import { When } from '../if';
+import Modal from '../modal';
 
-import ToDo from './todo';
+import ConnectedHeader from '../header/connected';
+import Form from '../form/form';
+import TodoList from '../todo-list/todo-list';
+import TodoDetails from '../todo-details/todo-details';
 
 import './todo.scss';
+
+import { Auth } from '../../context/authorization';
+
+import useLogin from '../../hooks/useLogin';
 
 const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
 
@@ -86,11 +95,77 @@ function reducer(state, action) {
   return {...state};
 }
 
-function ToDoConnected() {
+function ToDoConnected(props) {
+  const loginContext = useLogin();
+  const [state, dispatchFunc] = useReducer(reducer, {
+    todoList: [],
+    item: {},
+    showDetails: false,
+    details: {},
+  });
+
+  const dispatch = (action) => {
+    dispatchFunc({...action, dispatch});
+  }
+
+  if(!state.todoList) {
+    dispatch({type: 'initialize'});
+  }
+
+  const addItem = (item) => {
+    dispatch({ type: 'add', item});
+  };
+
+  const deleteItem = id => {
+
+    dispatch({ type: 'delete', id });
+
+  };
+
+  useEffect(() => {
+    callAPI( todoAPI, 'GET', null, data => dispatch({type: 'setTodo', todoList: data.results}) );
+  }, []);
+
+  // const saveItem = item => {
+
+  //   dispatch({ type: 'save', item });
+
+  // };
+
+  const toggleComplete = id => {
+
+    dispatch({ type: 'toggleComplete', id });
+  };
+
+  const toggleDetails = id => {
+    dispatch({ type: 'toggleDetails', id });
+  }
+  
   return (
-    <ToDo reducer={reducer} getTodoList={(dispatch) => {
-      callAPI( todoAPI, 'GET', null, data => dispatch({type: 'setTodo', todoList: data.results}) );
-    }}/>
+    <>
+      <ConnectedHeader count={state.todoList ? state.todoList.filter( item => !item.complete ).length : 0} />
+      <When condition={loginContext.hasCapability('read')}>
+        <>
+          <section className="todo">
+            <Auth type="create">
+              <Form addItem={addItem} />
+            </Auth>
+            <TodoList 
+              todoList={state.todoList} 
+              toggleComplete={loginContext.hasCapability('update') ? toggleComplete : null}
+              toggleDetails={toggleDetails}
+              deleteItem={loginContext.hasCapability('delete') ? deleteItem : null}
+            />
+          </section>
+
+          <When condition={state.showDetails}> 
+            <Modal title="To Do Item" close={toggleDetails}>
+              <TodoDetails item={state.details} />
+            </Modal>
+          </When> 
+        </>
+      </When>
+    </>
   );
 }
 

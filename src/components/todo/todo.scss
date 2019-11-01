@@ -9,7 +9,12 @@ body, html {
 
     display:flex;
     flex-direction:row;
-    justify-content: flex-start;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     margin: 2em;
+
+    * {
+        flex-grow: 1;
+    }
 
 }

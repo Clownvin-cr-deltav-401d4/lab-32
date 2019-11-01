@@ -1,0 +1,31 @@
+@mixin borderRadius($radius) {
+  border-radius: $radius;
+}
+
+//I don't know what else I'd want. I dislike using flex for most things.
+@mixin flex() {
+  display: flex;
+}
+
+@mixin center() {
+  margin: auto;
+  text-align: center;
+}
+
+//These are the only ones I ever really use.
+@mixin border($width, $style, $color) {
+  border-width: $width;
+  border-style: $style;
+  border-color: $color;
+}
+
+@mixin outline($width, $style, $color) {
+  outline: $width $style $color;
+}
+
+@mixin userSelect($value) {
+  user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+  -webkit-user-select: $value;
+}
