@@ -1,6 +1,15 @@
 # LAB - 32 / 33 / 34
 
-## TODO Server (Again)
+### Author: Calvin Hall
+
+### Links and Resources
+* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/1)(lab-32)
+* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/2)(lab-33)
+* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/3)(lab-34)
+* [![Build Status](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32.svg?branch=dev)](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32)
+
+## Changes for lab 32
+
 You’ve been supplied starter code for the To Do application that can (optionally) connect to a live API server. In this assignment, you’ll need to refactor the application in a number of ways:
 * Modularize both the todo and todo-connected components.
 * They will both use the same form, list, details sub-components
@@ -35,14 +44,6 @@ Implement the following RBAC rules:
 * Logged In Users with ‘delete’ permissions can click the records to mark them as complete
 * Logged In Users with ‘update’ permissions can edit existing items
 * Logged In Users with ‘create’ permissions can create new items
-
-### Author: Calvin Hall
-
-### Links and Resources
-* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/1)(lab-32)
-* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/2)(lab-33)
-* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/3)(lab-34)
-* [![Build Status](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32.svg?branch=dev)](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32)
 
 ## Modules
 ## Modules
