@@ -35,7 +35,6 @@ export default class LoginProvider extends React.Component {
   validateToken = token => {
     try {
       let user = jwt.decode(token);
-      console.log(user);
       this.setLoginState(token, user);
     }
     catch(e) {

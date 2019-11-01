@@ -9,24 +9,27 @@ import ToDoConnected from './components/todo/todo-connected.js';
 
 import ItemCountProvider from './context/item-count';
 import DisplayCompletedProvider from './context/display-completed';
+import LoginProvider from './context/authorization';
 
 export default class App extends React.Component {
   render() {
     return (
       <ItemCountProvider>
         <DisplayCompletedProvider>
-          <BrowserRouter>
-            <nav>
-              <ul>
-                <li><Link to="/">Local ToDo</Link></li>
-                <li><Link to="/connected">Connected ToDo</Link></li>
-              </ul>
-            </nav>
-            <Switch>
-              <Route path="/connected" component={ToDoConnected} />
-              <Route component={ToDo} />
-            </Switch>
-          </BrowserRouter>
+          <LoginProvider>
+            <BrowserRouter>
+              <nav>
+                <ul>
+                  <li><Link to="/">Local ToDo</Link></li>
+                  <li><Link to="/connected">Connected ToDo</Link></li>
+                </ul>
+              </nav>
+              <Switch>
+                <Route path="/connected" component={ToDoConnected} />
+                <Route component={ToDo} />
+              </Switch>
+            </BrowserRouter>
+          </LoginProvider>
         </DisplayCompletedProvider>
       </ItemCountProvider>
     );

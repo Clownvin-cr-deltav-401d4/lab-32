@@ -2,7 +2,7 @@ import React, {useReducer, useEffect} from 'react';
 import { When } from '../if';
 import Modal from '../modal';
 
-import Header from '../header/header';
+import ConnectedHeader from '../header/connected';
 import Form from '../form/form';
 import TodoList from '../todo-list/todo-list';
 import TodoDetails from '../todo-details/todo-details';
@@ -97,6 +97,7 @@ function reducer(state, action) {
 
 function ToDoConnected(props) {
   const loginContext = useLogin();
+  console.log(loginContext, "here");
   const [state, dispatchFunc] = useReducer(reducer, {
     todoList: [],
     item: {},
@@ -143,21 +144,24 @@ function ToDoConnected(props) {
   }
 
   const displayCompleted = useDisplayCompleted();
-
   return (
     <>
-      <Header count={state.todoList ? state.todoList.filter( item => !item.complete ).length : 0} />
-      <section className="todo">
-        <Form addItem={addItem} />
-        <button onClick={displayCompleted.toggleDisplayCompleted}>{displayCompleted.displayCompleted ? 'Hide' : 'Show'} Completed</button>
-        <TodoList todoList={displayCompleted.displayCompleted ? state.todoList : state.todoList.filter(item => !item.complete)} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
-      </section>
+      <ConnectedHeader count={state.todoList ? state.todoList.filter( item => !item.complete ).length : 0} />
+      {loginContext.user ? (
+        <>
+          <section className="todo">
+            <Form addItem={addItem} />
+            <button onClick={displayCompleted.toggleDisplayCompleted}>{displayCompleted.displayCompleted ? 'Hide' : 'Show'} Completed</button>
+            <TodoList todoList={displayCompleted.displayCompleted ? state.todoList : state.todoList.filter(item => !item.complete)} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
+          </section>
 
-      <When condition={state.showDetails}> 
-        <Modal title="To Do Item" close={toggleDetails}>
-          <TodoDetails item={state.details} />
-        </Modal>
-      </When>
+          <When condition={state.showDetails}> 
+            <Modal title="To Do Item" close={toggleDetails}>
+              <TodoDetails item={state.details} />
+            </Modal>
+          </When> 
+        </>)
+      : null}
     </>
   );
 }

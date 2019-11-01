@@ -11,7 +11,9 @@ const TodoList = props => {
   const pageCount = Math.ceil(props.todoList.length / itemCount.count);
   const start = page * itemCount.count;
   const end = Math.min(start + itemCount.count, props.todoList.length);
-
+  if (props.todoList.length === 0) {
+    return null;
+  }
   /*
   for page buttons.
   const count = Math.ceil(props.todoList.length / itemCount.count);
@@ -54,7 +56,7 @@ const TodoList = props => {
           <TodoItem key={item._id} item={item} toggleComplete={props.toggleComplete} toggleDetails={props.toggleDetails} deleteItem={props.deleteItem} />
         ))}
       </ul>
-      Page {page + 1} of {pageCount + 1}
+      Page {page + 1} of {pageCount}
       {
         getPageButtons()
       }
