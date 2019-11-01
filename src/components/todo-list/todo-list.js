@@ -8,10 +8,12 @@ import useItemCount from '../../hooks/useItemCount';
 import useDisplayCompleted from '../../hooks/useDisplayCompleted';
 
 const TodoList = props => {
+  const [page, setPage] = useState(0);
+
   const displayCompleted = useDisplayCompleted();
   const list = !displayCompleted.displayCompleted ? props.todoList.filter(item => !item.complete) : props.todoList;
+
   const itemCount = useItemCount();
-  const [page, setPage] = useState(0);
   const pageCount = Math.ceil(list.length / itemCount.count);
   const start = page * itemCount.count;
   const end = Math.min(start + itemCount.count, list.length);
@@ -23,10 +25,7 @@ const TodoList = props => {
   if (page >= pageCount) {
     setPage(pageCount - 1);
   }
-  /*
-  for page buttons.
-  
-  */
+
   const getPageButtons = () => {
     let buttons = [];
     const count = Math.ceil(list.length / itemCount.count);
@@ -40,8 +39,13 @@ const TodoList = props => {
 
   return (
     <div>
-      <input type="range" min={1} max={list.length} value={itemCount.count} onChange={ e => itemCount.setCount(e.target.value) } />
-      <button onClick={displayCompleted.toggleDisplayCompleted}>{displayCompleted.displayCompleted ? 'Hide' : 'Show'} Completed</button>
+      <form onSubmit={e => e.preventDefault() }>
+        <input type="range" min={ 5 || list.length } max={ list.length } value={itemCount.count} onChange={ e => itemCount.setCount(e.target.value) } />
+        <label>
+          <span>{displayCompleted.displayCompleted ? 'Hide' : 'Show'} Completed</span>
+          <input type="checkbox" onChange={displayCompleted.toggleDisplayCompleted} checked={!displayCompleted.displayCompleted} />
+        </label>
+      </form>
       <ul>
         { list.slice(start, end).map(item => (
           <TodoItem key={item._id} item={item} toggleComplete={props.toggleComplete} toggleDetails={props.toggleDetails} deleteItem={props.deleteItem} />
