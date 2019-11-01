@@ -72,6 +72,12 @@ A context for toggling the display of completed items.
 ### useDisplayCompleted
 A hook to enable easy access to DisplayCompletedContext
 
+### LoginContext/Provider
+A context provider for login information
+
+### useLogin
+A hook to enable easy access to LoginContext
+
 ## Running the app
 * `npm start`
   
