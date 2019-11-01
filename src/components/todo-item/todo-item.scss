@@ -25,6 +25,7 @@ li {
 
 .complete-true span {
   border: 2px solid pink;
+  color: pink;
   text-decoration:line-through;
   transition-duration: .15s;
   &:hover {
