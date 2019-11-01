@@ -21,7 +21,7 @@
     }
 
     > div {
-        background:#fff;
+        background:#222;
         box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
         box-sizing:border-box;
         border-radius: 5px;
@@ -37,34 +37,28 @@
         z-index:1000;
 
         > header {
-            background: #ccc;
+            background: #111;
             border-bottom: 0 none;
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
             box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
-            display:flex;
             font-size:1em;
             font-weight:bold;
-            height:1.5em;
             line-height:1.5em;
-            padding: .25em 1em;
+            padding: .25em 0;
 
             span {
-                color:#000;
-                flex:1;
+                color:#0F5;
             }
 
             button {
-                background: inherit;
-                border: 0;
-                cursor:pointer;
-                order: 1;
-                text-align:center;
-
-                &:hover {
-                    background:#000;
-                    color:#fff;
-                }
+                position: absolute;
+                top : 0;
+                right: 0;
+                padding: 0;
+                border: none !important;
+                background: none !important;
+                cursor: pointer;
             }
 
         }

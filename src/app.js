@@ -11,6 +11,8 @@ import ItemCountProvider from './context/item-count';
 import DisplayCompletedProvider from './context/display-completed';
 import LoginProvider from './context/authorization';
 
+import './styles/design.scss';
+
 export default class App extends React.Component {
   render() {
     return (
@@ -18,10 +20,10 @@ export default class App extends React.Component {
         <DisplayCompletedProvider>
           <LoginProvider>
             <BrowserRouter>
-              <nav>
+              <nav className="vertical" style={{textAlign: 'center'}} >
                 <ul>
-                  <li><Link to="/">Local ToDo</Link></li>
-                  <li><Link to="/connected">Connected ToDo</Link></li>
+                  <li><Link to="/" style={{width: "100%"}}>Local ToDo</Link></li>
+                  <li><Link to="/connected" style={{width: "100%"}}>Connected ToDo</Link></li>
                 </ul>
               </nav>
               <Switch>

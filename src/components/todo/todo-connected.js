@@ -97,7 +97,6 @@ function reducer(state, action) {
 
 function ToDoConnected(props) {
   const loginContext = useLogin();
-  console.log(loginContext, "here");
   const [state, dispatchFunc] = useReducer(reducer, {
     todoList: [],
     item: {},
@@ -114,7 +113,6 @@ function ToDoConnected(props) {
   }
 
   const addItem = (item) => {
-    console.log(item);
     dispatch({ type: 'add', item});
   };
 
@@ -146,7 +144,7 @@ function ToDoConnected(props) {
   return (
     <>
       <ConnectedHeader count={state.todoList ? state.todoList.filter( item => !item.complete ).length : 0} />
-      <When condition={!!loginContext.user}>
+      <When condition={loginContext.hasCapability('read')}>
         <>
           <section className="todo">
             <Auth type="create">

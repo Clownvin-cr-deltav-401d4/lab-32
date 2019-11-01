@@ -1,0 +1,14 @@
+#root > footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5vh;
+  width: 100vw;
+  margin: auto;
+  p {
+    font-size: 125%;
+    height: 75%;
+    display: block;
+    margin: auto;
+  }
+}

@@ -33,7 +33,7 @@ const ConnectedHeader = props => {
       ) : (
         <>
           <h2>Please login</h2>
-          <form id="login" onSubmit={onSubmit}>
+          <form id="login" onSubmit={onSubmit} style={{maxWidth: "300px"}}>
             <input type="text" onChange={updateUsername} value={details.username} placeholder="Username" />
             <input type="password" onChange={updatePassword} value={details.password} placeholder="Password" />
             <input type="submit" value="Login" />

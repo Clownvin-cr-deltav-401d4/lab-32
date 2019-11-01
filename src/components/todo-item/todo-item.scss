@@ -7,35 +7,27 @@ li {
   margin: .75em .5em;
 
   span {
-    background: #e0e0e0;
     cursor:pointer;
+    transition-duration: .15s;
     &:hover {
-        background: pink;
+      border: 2px solid pink;
     }
   }
 
   span, input {
-      border: .5px solid #eee;
+      border: 2px solid seagreen;
       display:inline-block;
       padding: .2em .25em;
       width: 300px;
   }
 
-  button {
-      background: transparent;
-      border:none;
-      color:blue;
-      cursor:pointer;
-      padding:0;
-      margin: 0 .75em;
-  }
-
 }
 
 .complete-true span {
-  background: pink;
+  border: 2px solid pink;
   text-decoration:line-through;
+  transition-duration: .15s;
   &:hover {
-      background: seagreen;
+    border: 2px solid seagreen;
   }
 }

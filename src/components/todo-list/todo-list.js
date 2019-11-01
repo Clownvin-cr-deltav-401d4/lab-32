@@ -40,7 +40,7 @@ const TodoList = props => {
   return (
     <div>
       <form onSubmit={e => e.preventDefault() }>
-        <input type="range" min={ 5 || list.length } max={ list.length } value={itemCount.count} onChange={ e => itemCount.setCount(e.target.value) } />
+        <input type="range" min={ 5 || list.length } value={itemCount.count} max={ list.length } onChange={ e => itemCount.setCount(Number.parseInt(e.target.value)) } />
         <label>
           <span>{displayCompleted.displayCompleted ? 'Hide' : 'Show'} Completed</span>
           <input type="checkbox" onChange={displayCompleted.toggleDisplayCompleted} checked={!displayCompleted.displayCompleted} />
