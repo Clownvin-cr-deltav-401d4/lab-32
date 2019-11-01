@@ -18,7 +18,7 @@ const TodoList = props => {
   const start = page * itemCount.count;
   const end = Math.min(start + itemCount.count, list.length);
 
-  if (list.length === 0) {
+  if (props.todoList.length === 0) {
     return null;
   }
 

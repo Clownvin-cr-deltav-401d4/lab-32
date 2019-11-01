@@ -105,7 +105,7 @@ function ToDoLocal(props) {
       <Header count={state.todoList ? state.todoList.filter( item => !item.complete ).length : 0} />
       <section className="todo">
         <Form addItem={addItem} />
-        <TodoList todoList={displayCompleted.displayCompleted ? state.todoList : state.todoList.filter(item => !item.complete)} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
+        <TodoList todoList={state.todoList} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
       </section>
 
       <When condition={state.showDetails}> 
