@@ -16,7 +16,7 @@ const Form = props => {
             Add Todo
           </legend>
           <label>
-            <span>Text</span>
+            <span>Details</span>
             <input
               name="text"
               placeholder="What needs done..."

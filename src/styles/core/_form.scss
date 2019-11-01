@@ -18,6 +18,10 @@ form {
     border-radius: 3px;
   }
 
+  legend {
+    font-size: 125%;
+  }
+
   label {
     display: grid;
     grid-template-columns: 1fr 4fr;
