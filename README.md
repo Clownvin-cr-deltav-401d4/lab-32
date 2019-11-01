@@ -39,7 +39,9 @@ Implement the following RBAC rules:
 ### Author: Calvin Hall
 
 ### Links and Resources
-* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/3)
+* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/1)(lab-32)
+* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/2)(lab-33)
+* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/3)(lab-34)
 * [![Build Status](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32.svg?branch=dev)](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32)
 
 ## Modules
