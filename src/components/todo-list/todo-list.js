@@ -22,7 +22,7 @@ const TodoList = props => {
     return null;
   }
 
-  if (page >= pageCount) {
+  if (page >= pageCount && pageCount != 0) {
     setPage(pageCount - 1);
   }
 
@@ -51,7 +51,7 @@ const TodoList = props => {
           <TodoItem key={item._id} item={item} toggleComplete={props.toggleComplete} toggleDetails={props.toggleDetails} deleteItem={props.deleteItem} />
         ))}
       </ul>
-      <p>Page {page + 1} of {pageCount}</p>
+      <p>Page {page + 1} of {pageCount || 1}</p>
       <button onClick={() => setPage(page - 1)} disabled={page <= 0}>Prev</button>
       {
         getPageButtons()
