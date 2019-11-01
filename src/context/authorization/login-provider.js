@@ -15,6 +15,7 @@ export default class LoginProvider extends React.Component {
       user: null,
       login: this.login,
       logout: this.logout,
+      hasCapability: this.hasCapability,
     };
   }
 
@@ -41,6 +42,10 @@ export default class LoginProvider extends React.Component {
       this.logout();
       console.error(e);
     }
+  }
+
+  hasCapability = capability => {
+    return this.state.user && this.state.user.capabilities.includes(capability);
   }
 
   logout = () => {

@@ -7,8 +7,6 @@ import Form from '../form/form';
 import TodoList from '../todo-list/todo-list';
 import TodoDetails from '../todo-details/todo-details';
 
-import useDisplayCompleted from '../../hooks/useDisplayCompleted';
-
 import './todo.scss';
 
 import { Auth } from '../../context/authorization';
@@ -154,7 +152,12 @@ function ToDoConnected(props) {
             <Auth type="create">
               <Form addItem={addItem} />
             </Auth>
-            <TodoList todoList={state.todoList} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
+            <TodoList 
+              todoList={state.todoList} 
+              toggleComplete={loginContext.hasCapability('update') ? toggleComplete : null}
+              toggleDetails={toggleDetails}
+              deleteItem={loginContext.hasCapability('delete') ? deleteItem : null}
+            />
           </section>
 
           <When condition={state.showDetails}> 
