@@ -5,14 +5,23 @@ import './todo-list.scss';
 import TodoItem from '../todo-item';
 import useItemCount from '../../hooks/useItemCount';
 
+import useDisplayCompleted from '../../hooks/useDisplayCompleted';
+
 const TodoList = props => {
+  const displayCompleted = useDisplayCompleted();
+  const list = !displayCompleted.displayCompleted ? props.todoList.filter(item => !item.complete) : props.todoList;
   const itemCount = useItemCount();
   const [page, setPage] = useState(0);
-  const pageCount = Math.ceil(props.todoList.length / itemCount.count);
+  const pageCount = Math.ceil(list.length / itemCount.count);
   const start = page * itemCount.count;
-  const end = Math.min(start + itemCount.count, props.todoList.length);
-  if (props.todoList.length === 0) {
+  const end = Math.min(start + itemCount.count, list.length);
+
+  if (list.length === 0) {
     return null;
+  }
+
+  if (page >= pageCount) {
+    setPage(pageCount - 1);
   }
   /*
   for page buttons.
@@ -20,7 +29,7 @@ const TodoList = props => {
   */
   const getPageButtons = () => {
     let buttons = [];
-    const count = Math.ceil(props.todoList.length / itemCount.count);
+    const count = Math.ceil(list.length / itemCount.count);
     for (let i = 0; i < count; i++) {
       buttons.push((
         <button key={i} onClick={() => setPage(i)} disabled={page === i}>{ i + 1 }</button>
@@ -29,34 +38,21 @@ const TodoList = props => {
     return buttons;
   }
 
-  const getCountButtons = () => {
-    return (
-      <div>
-        Results per page:
-        <button onClick={() => itemCount.setCount(5)} >5</button>
-        <button onClick={() => itemCount.setCount(10)} >10</button>
-        <button onClick={() => itemCount.setCount(15)} >15</button>
-        <button onClick={() => itemCount.setCount(20)} >20</button>
-      </div>
-    )
-  }
-
   return (
     <div>
-      {
-        getCountButtons()
-      }
+      <input type="range" min={1} max={list.length} value={itemCount.count} onChange={ e => itemCount.setCount(e.target.value) } />
+      <button onClick={displayCompleted.toggleDisplayCompleted}>{displayCompleted.displayCompleted ? 'Hide' : 'Show'} Completed</button>
       <ul>
-        { props.todoList.slice(start, end).map(item => (
+        { list.slice(start, end).map(item => (
           <TodoItem key={item._id} item={item} toggleComplete={props.toggleComplete} toggleDetails={props.toggleDetails} deleteItem={props.deleteItem} />
         ))}
       </ul>
-      Page {page + 1} of {pageCount}
-      <button onClick={() => setPage(page + 1)} disabled={page >= pageCount - 1}>Next</button>
+      <p>Page {page + 1} of {pageCount}</p>
+      <button onClick={() => setPage(page - 1)} disabled={page <= 0}>Prev</button>
       {
         getPageButtons()
       }
-      <button onClick={() => setPage(page - 1)} disabled={page <= 0}>Previous</button>
+      <button onClick={() => setPage(page + 1)} disabled={page >= pageCount - 1}>Next</button>
     </div>
   );
 };

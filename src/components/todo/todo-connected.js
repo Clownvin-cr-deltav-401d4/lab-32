@@ -144,8 +144,7 @@ function ToDoConnected(props) {
   const toggleDetails = id => {
     dispatch({ type: 'toggleDetails', id });
   }
-
-  const displayCompleted = useDisplayCompleted();
+  
   return (
     <>
       <ConnectedHeader count={state.todoList ? state.todoList.filter( item => !item.complete ).length : 0} />
@@ -155,8 +154,7 @@ function ToDoConnected(props) {
             <Auth type="create">
               <Form addItem={addItem} />
             </Auth>
-            <button onClick={displayCompleted.toggleDisplayCompleted}>{displayCompleted.displayCompleted ? 'Hide' : 'Show'} Completed</button>
-            <TodoList todoList={displayCompleted.displayCompleted ? state.todoList : state.todoList.filter(item => !item.complete)} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
+            <TodoList todoList={state.todoList} toggleComplete={toggleComplete} toggleDetails={toggleDetails} deleteItem={deleteItem} />
           </section>
 
           <When condition={state.showDetails}> 
