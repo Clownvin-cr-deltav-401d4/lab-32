@@ -1,4 +1,4 @@
-# LAB - 32 / 33 / 34
+# LAB - 32 / 33 / 34 / 36
 
 ### Author: Calvin Hall
 
@@ -6,6 +6,7 @@
 * [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/1)(lab-32)
 * [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/2)(lab-33)
 * [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/3)(lab-34)
+* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/4)(lab-36)
 * [![Build Status](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32.svg?branch=dev)](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32)
 
 ## Changes for lab 32
@@ -44,6 +45,14 @@ Implement the following RBAC rules:
 * Logged In Users with ‘delete’ permissions can click the records to mark them as complete
 * Logged In Users with ‘update’ permissions can edit existing items
 * Logged In Users with ‘create’ permissions can create new items
+
+## Changes for lab 36
+
+* Convert the state management to a Redux Store.
+* Create a Redux Store and two reducers:
+* A todoList reducer, to track the list
+* A details reducer, to track which item detail to show
+* Wire up the components to subscribe to the store for state and actions
 
 ## Modules
 ## Modules
