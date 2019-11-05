@@ -13,7 +13,7 @@ function TodoItem(props) {
       <span onClick={() => toggleComplete(props.item._id)}>
         {props.item.text}
       </span>
-      <button onClick={() => props.toggleDetails(props.item._id)}>
+      <button onClick={() => props.toggleDetails(props.item)}>
         Details
       </button>
       <button className="delete" onClick={() => deleteItem(props.item._id)} disabled={!props.deleteItem}>
