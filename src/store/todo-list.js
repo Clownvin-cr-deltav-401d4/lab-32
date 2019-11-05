@@ -7,7 +7,7 @@ export default function reducer(state = {todoList: []}, action) {
   let defaults;
   switch (action.type) {
   case 'add': //, item });
-    defaults = { _id: uuid(), complete:false };
+    defaults = { _id: action.item._id || uuid(), complete:false };
     item = Object.assign({}, action.item, defaults);
     return {...state, todoList: [...state.todoList, item]};
   case 'delete': //, id });
