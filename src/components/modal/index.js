@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './modal.module.scss';
 
 const Modal = props => {
+  console.log('Rendering modal with props', props);
   return (
     <div className={styles.modal}>
       <div>

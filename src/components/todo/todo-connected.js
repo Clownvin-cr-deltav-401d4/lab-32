@@ -75,14 +75,14 @@ function reducer(state, action) {
       callAPI( `${todoAPI}/${action.id}`, 'DELETE', null, () => action.dispatch({...action, followUp: true}) );
       break;
     case 'save': //, item });
-      callAPI( `${todoAPI}/${action.item._id}`, 'PUT', action.item, action.dispatch({...action, followUp: true}) );
+      callAPI( `${todoAPI}/${action.item._id}`, 'PUT', action.item, () => action.dispatch({...action, followUp: true}) );
       break;
     case 'toggleComplete': //, id });
       item = state.todoList.find(item => item._id === action.id);
       if (!item) {
         break;
       }
-      callAPI( `${todoAPI}/${action.id}`, 'PUT', {...item, complete: !item.complete}, action.dispatch({...action, followUp: true}) );
+      callAPI( `${todoAPI}/${action.id}`, 'PUT', {...item, complete: !item.complete}, () => action.dispatch({...action, followUp: true}) );
       break;
     case 'toggleDetails': //, id });
       item = state.todoList.find(item => item._id === action.id);
