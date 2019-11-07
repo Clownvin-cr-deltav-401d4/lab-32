@@ -7,6 +7,7 @@
 * [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/2)(lab-33)
 * [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/3)(lab-34)
 * [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/4)(lab-36)
+* [submission PR](https://github.com/Clownvin-cr-deltav-401d4/lab-32/pull/5)(lab-37)
 * [![Build Status](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32.svg?branch=dev)](https://www.travis-ci.com/Clownvin-cr-deltav-401d4/lab-32)
 
 ## Changes for lab 32
@@ -53,6 +54,14 @@ Implement the following RBAC rules:
 * A todoList reducer, to track the list
 * A details reducer, to track which item detail to show
 * Wire up the components to subscribe to the store for state and actions
+
+## Changes for lab 37
+
+Convert the current form rendering/submission process into one of either:
+
+* React JSON Schema Form
+* Redux Form
+* A form library of your own choosing
 
 ## Modules
 ## Modules
